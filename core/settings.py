@@ -38,7 +38,7 @@ if "DEVELOPMENT" in os.environ:
     ALLOWED_HOSTS = []
 else:
     # ALLOWED_HOSTS = ["thrifthub-backend.herokuapp.com", "localhost"]
-    ALLOWED_HOSTS = ["*"]
+    ALLOWED_HOSTS = ["*", '.vercel.app']
 
 # Application definition
 
