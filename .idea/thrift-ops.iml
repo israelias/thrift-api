@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="PYTHON_MODULE" version="4">
+  <component name="FacetManager">
+    <facet type="django" name="Django">
+      <configuration>
+        <option name="rootFolder" value="$MODULE_DIR$" />
+        <option name="settingsModule" value="core/settings.py" />
+        <option name="manageScript" value="manage.py" />
+        <option name="environment" value="&lt;map&gt;&#10;  &lt;entry&gt;&#10;    &lt;string&gt;EMAIL_PORT&lt;/string&gt;&#10;    &lt;string&gt;587&lt;/string&gt;&#10;  &lt;/entry&gt;&#10;  &lt;entry&gt;&#10;    &lt;string&gt;STRIPE_PUBLIC_KEY&lt;/string&gt;&#10;    &lt;string&gt;pk_test_51J2BHrIPDTNVSO6kqBTaTI8e0kXrWpRbZa89Hb7M5ydv5onBDdondvujfY5xzOjSRr9EUobHYpeUt2u7krvjm3hS00yzAJCyf8&lt;/string&gt;&#10;  &lt;/entry&gt;&#10;  &lt;entry&gt;&#10;    &lt;string&gt;STRIPE_WH_SECRET&lt;/string&gt;&#10;    &lt;string&gt;whsec_QpbQh3WG8vsOAOsC3vFMzlEYfUqNE84J&lt;/string&gt;&#10;  &lt;/entry&gt;&#10;  &lt;entry&gt;&#10;    &lt;string&gt;SECRET_ACCESS_KEY&lt;/string&gt;&#10;    &lt;string&gt;QQ04pAKL2MVSJ7ybUE219cUxSWFPMyQyEO8qZb7l&lt;/string&gt;&#10;  &lt;/entry&gt;&#10;  &lt;entry&gt;&#10;    &lt;string&gt;STRIPE_SECRET_KEY&lt;/string&gt;&#10;    &lt;string&gt;sk_test_51J2BHrIPDTNVSO6kKo7Brsue8UK0jGsN32tIaTMPeGhoL2x2kO571NSH56SbvFNfFNZKUXcFT3beJfCPCXMAvpB6005lF8gN3M&lt;/string&gt;&#10;  &lt;/entry&gt;&#10;  &lt;entry&gt;&#10;    &lt;string&gt;EMAIL_HOST_PASSWORD&lt;/string&gt;&#10;    &lt;string&gt;ryaacmiiawwsqiil&lt;/string&gt;&#10;  &lt;/entry&gt;&#10;  &lt;entry&gt;&#10;    &lt;string&gt;EMAIL_HOST_USER&lt;/string&gt;&#10;    &lt;string&gt;sraelias.js@gmail.com&lt;/string&gt;&#10;  &lt;/entry&gt;&#10;  &lt;entry&gt;&#10;    &lt;string&gt;SECRET_KEY&lt;/string&gt;&#10;    &lt;string&gt;django-insecure-c+1b6t3x%\=&amp;amp;n0_y^h&amp;amp;9wzl1_!nr-e9%200tqyl&amp;amp;-$u2_^pytz1&lt;/string&gt;&#10;  &lt;/entry&gt;&#10;  &lt;entry&gt;&#10;    &lt;string&gt;ACCESS_KEY_ID&lt;/string&gt;&#10;    &lt;string&gt;AKIAV52C225ZJEAHYEGP&lt;/string&gt;&#10;  &lt;/entry&gt;&#10;  &lt;entry&gt;&#10;    &lt;string&gt;EMAIL_HOST&lt;/string&gt;&#10;    &lt;string&gt;smtp.sendgrid.net&lt;/string&gt;&#10;  &lt;/entry&gt;&#10;&lt;/map&gt;" />
+        <option name="doNotUseTestRunner" value="false" />
+        <option name="trackFilePattern" value="" />
+      </configuration>
+    </facet>
+  </component>
+  <component name="NewModuleRootManager">
+    <content url="file://$MODULE_DIR$" />
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+  <component name="PyDocumentationSettings">
+    <option name="format" value="PLAIN" />
+    <option name="myDocStringFormat" value="Plain" />
+  </component>
+  <component name="TemplatesService">
+    <option name="TEMPLATE_CONFIGURATION" value="Django" />
+  </component>
+</module>
