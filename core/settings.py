@@ -117,9 +117,15 @@ SWAGGER_SETTINGS = {
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 # Cockroach DB
-if "CONNECTION_STRING" in os.environ:
+if "DATABASE_URL" in os.environ:
     print('Using Cockroach PostgreSQL...')
-    DATABASES = {"default": dj_database_url.parse(os.environ.get("CONNECTION_STRING"))}
+    DATABASES = {
+        'default':
+            dj_database_url.config(
+                default=os.environ['DATABASE_URL'],
+                engine='django_cockroachdb'
+            )
+    }
 
 # AWS RDS
 elif 'RDS_HOSTNAME' in os.environ:

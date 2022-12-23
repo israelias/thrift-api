@@ -16,4 +16,5 @@ yarn-error.log export-ignore
 .gitignore export-ignore
 .elasticbeanstalk export-ignore
 .ebextensions export-ignore
+*.zip export-ignore
 config.yml export-ignore
