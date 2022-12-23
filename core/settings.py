@@ -38,7 +38,11 @@ if "DEVELOPMENT" in os.environ:
     ALLOWED_HOSTS = []
 else:
     # ALLOWED_HOSTS = ["thrifthub-backend.herokuapp.com", "localhost"]
-    ALLOWED_HOSTS = ["*", 'eb-thriftapi-dev.eba-biwytap9.us-west-2.elasticbeanstalk.com', 'eb-thriftapi-dev.elasticbeanstalk.com']
+    ALLOWED_HOSTS = ["*",
+                     'eb-thriftapi-dev.eba-biwytap9.us-west-2.elasticbeanstalk.com',
+                     'eb-thriftapi-dev.elasticbeanstalk.com'
+                     ''
+                     ]
 
 # Application definition
 
@@ -139,8 +143,9 @@ else:
         }
     }
 
-print("Connection string:")
-print(dj_database_url.parse(DATABASES['default']))
+# if DATABASES['default']:
+#     print("Connection string:")
+#     print(dj_database_url.parse(DATABASES['default']))
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators

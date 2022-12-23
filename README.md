@@ -7,8 +7,59 @@ DJ-DRF Models and Serverless ETL Functions using Vercel's Python Runtime.
 This is serves [israelias/thrift-fe](https://github.com/israelias/django-react-ecommerce/tree/master/frontend)
 
 ## `@todo` 
+`git config --global --unset https.proxy`
+`git config --global --unset http.proxy`
 
+```python
+pip install wheel setuptools pip --upgrade
+pip3 install wheel setuptools pip --upgrade
+```
+ pip list --format=freeze > requirementss.txt
+--use-deprecated=legacy-resolver
 This is a migration.
+
+Python has been installed as
+  /opt/homebrew/bin/python3
+
+Unversioned symlinks `python`, `python-config`, `pip` etc. pointing to
+`python3`, `python3-config`, `pip3` etc., respectively, have been installed into
+  /opt/homebrew/opt/python@3.10/libexec/bin
+
+You can install Python packages with
+  pip3 install <package>
+They will install into the site-package directory
+  /opt/homebrew/lib/python3.10/site-packages
+
+tkinter is no longer included with this formula, but it is available separately:
+  brew install python-tk@3.10
+
+See: https://docs.brew.sh/Homebrew-and-Python
+==> Summary
+🍺  /opt/homebrew/Cellar/python@3.10/3.10.9: 3,110 files, 57.1MB
+==> Running `brew cleanup python@3.10`...
+Disable this behaviour by setting HOMEBREW_NO_INSTALL_CLEANUP.
+Hide these hints with HOMEBREW_NO_ENV_HINTS (see `man brew`).
+==> Caveats
+==> python@3.10
+Python has been installed as
+  /opt/homebrew/bin/python3
+
+Unversioned symlinks `python`, `python-config`, `pip` etc. pointing to
+`python3`, `python3-config`, `pip3` etc., respectively, have been installed into
+  /opt/homebrew/opt/python@3.10/libexec/bin
+
+You can install Python packages with
+  pip3 install <package>
+They will install into the site-package directory
+  /opt/homebrew/lib/python3.10/site-packages
+
+tkinter is no longer included with this formula, but it is available separately:
+  brew install python-tk@3.10
+
+See: https://docs.brew.sh/Homebrew-and-Python
+
+--use-deprecated=legacy-resolver --use-pep517
+
 
 - [ ] Factory Data
 - [ ] Testing 
