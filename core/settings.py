@@ -38,7 +38,7 @@ if "DEVELOPMENT" in os.environ:
     ALLOWED_HOSTS = []
 else:
     # ALLOWED_HOSTS = ["thrifthub-backend.herokuapp.com", "localhost"]
-    ALLOWED_HOSTS = ["*"]
+    ALLOWED_HOSTS = ["*", 'eb-thriftapi-dev.eba-biwytap9.us-west-2.elasticbeanstalk.com', 'eb-thriftapi-dev.elasticbeanstalk.com']
 
 # Application definition
 
@@ -112,9 +112,22 @@ SWAGGER_SETTINGS = {
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-
+# Cockroach DB
 if "DATABASE_URL" in os.environ:
     DATABASES = {"default": dj_database_url.parse(os.environ.get("DATABASE_URL"))}
+
+# EB RDS
+# elif 'RDS_HOSTNAME' in os.environ:
+#     DATABASES = {
+#         'default': {
+#             'ENGINE': 'django.db.backends.mysql',
+#             'NAME': os.environ['RDS_DB_NAME'],
+#             'USER': os.environ['RDS_USERNAME'],
+#             'PASSWORD': os.environ['RDS_PASSWORD'],
+#             'HOST': os.environ['RDS_HOSTNAME'],
+#             'PORT': os.environ['RDS_PORT'],
+#         }
+#     }
 else:
     DATABASES = {
         "default": {
@@ -185,8 +198,8 @@ if "USE_AWS" in os.environ:
     # Bucket Config
     AWS_STORAGE_BUCKET_NAME = "thrifthub"
     AWS_S3_REGION_NAME = "ap-southeast-1"
-    AWS_ACCESS_KEY_ID = os.environ.get("ACCESS_KEY_ID")
-    AWS_SECRET_ACCESS_KEY = os.environ.get("SECRET_ACCESS_KEY")
+    AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID")
+    AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY")
     AWS_S3_CUSTOM_DOMAIN = f"{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com"
 
     # Static and media files

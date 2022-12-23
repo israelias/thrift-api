@@ -3,7 +3,7 @@ __pycache__
 .vscode/
 .DS_Store
 node_modules
-.env
+.env*
 env.py
 yarn-error.log
 core/versatileimagefield.py
@@ -12,3 +12,8 @@ media/__sized__
 media/images/
 media/profiles
 .vercel
+*.pem
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
