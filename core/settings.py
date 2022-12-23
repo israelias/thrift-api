@@ -113,15 +113,16 @@ SWAGGER_SETTINGS = {
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 # Cockroach DB
-# if "DATABASE_URL" in os.environ:
-#     DATABASES = {"default": dj_database_url.parse(os.environ.get("DATABASE_URL"))}
+if "CONNECTION_STRING" in os.environ:
+    print('Using Cockroach PostgreSQL...')
+    DATABASES = {"default": dj_database_url.parse(os.environ.get("CONNECTION_STRING"))}
 
-# EB RDS
-if 'USE_AWS' in os.environ:
-    print('Using AWS Redshift...')
+# AWS RDS
+elif 'RDS_HOSTNAME' in os.environ:
+    print('Using AWS Redshift MySQL...')
     DATABASES = {
         'default': {
-            'ENGINE': 'django.db.backends.postgresql',
+            'ENGINE': 'django.db.backends.mysql',
             'NAME': os.environ['RDS_DB_NAME'],
             'USER': os.environ['RDS_USERNAME'],
             'PASSWORD': os.environ['RDS_PASSWORD'],

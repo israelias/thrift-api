@@ -1,17 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="accountSettings">
-    <option name="activeProfile" value="profile:default" />
-    <option name="activeRegion" value="us-east-1" />
+    <option name="activeProfile" value="profile:joem" />
+    <option name="activeRegion" value="us-west-2" />
     <option name="recentlyUsedProfiles">
       <list>
+        <option value="profile:joem" />
         <option value="profile:default" />
       </list>
     </option>
     <option name="recentlyUsedRegions">
       <list>
+        <option value="us-west-2" />
         <option value="us-east-1" />
       </list>
+    </option>
+  </component>
+  <component name="connectionManager">
+    <option name="activeConnectionId" value="AwsConnectionManagerConnection" />
+  </component>
+  <component name="connectionPinningManager">
+    <option name="doNotPromptForPinning" value="true" />
+    <option name="pinnedConnections">
+      <map>
+        <entry key="aws.codecatalyst" value="sso;https://view.awsapps.com/start" />
+        <entry key="aws.codewhisperer" value="sso;https://view.awsapps.com/start" />
+      </map>
     </option>
   </component>
 </project>
