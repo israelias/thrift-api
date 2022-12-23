@@ -113,28 +113,33 @@ SWAGGER_SETTINGS = {
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 # Cockroach DB
-if "DATABASE_URL" in os.environ:
-    DATABASES = {"default": dj_database_url.parse(os.environ.get("DATABASE_URL"))}
+# if "DATABASE_URL" in os.environ:
+#     DATABASES = {"default": dj_database_url.parse(os.environ.get("DATABASE_URL"))}
 
 # EB RDS
-# elif 'RDS_HOSTNAME' in os.environ:
-#     DATABASES = {
-#         'default': {
-#             'ENGINE': 'django.db.backends.mysql',
-#             'NAME': os.environ['RDS_DB_NAME'],
-#             'USER': os.environ['RDS_USERNAME'],
-#             'PASSWORD': os.environ['RDS_PASSWORD'],
-#             'HOST': os.environ['RDS_HOSTNAME'],
-#             'PORT': os.environ['RDS_PORT'],
-#         }
-#     }
+if 'USE_AWS' in os.environ:
+    print('Using AWS Redshift...')
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': os.environ['RDS_DB_NAME'],
+            'USER': os.environ['RDS_USERNAME'],
+            'PASSWORD': os.environ['RDS_PASSWORD'],
+            'HOST': os.environ['RDS_HOSTNAME'],
+            'PORT': os.environ['RDS_PORT'],
+        }
+    }
 else:
+    print("Using local DB...")
     DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.sqlite3",
             "NAME": str(BASE_DIR / "db.sqlite3"),
         }
     }
+
+print("Connection string:")
+print(dj_database_url.parse(DATABASES['default']))
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
