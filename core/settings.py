@@ -37,8 +37,8 @@ DEBUG = "DEVELOPMENT" in os.environ
 if "DEVELOPMENT" in os.environ:
     ALLOWED_HOSTS = []
 else:
-    # ALLOWED_HOSTS = ["thrifthub-backend.herokuapp.com", "localhost"]
-    ALLOWED_HOSTS = ["*"]
+    ALLOWED_HOSTS = ["thriftapi.applikuapp.com", "localhost"]
+    # ALLOWED_HOSTS = ["*"]
 
 # Application definition
 
