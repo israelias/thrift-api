@@ -239,7 +239,7 @@ class ProductPreviewSerializer(FlexFieldsModelSerializer):
         if images:
             image_serializer = ImageNewSerializer(images)
             return image_serializer.data.get("image")
-        return image_serializer.data
+        return {}
 
 
 class ProductSimilarSerializer(FlexFieldsModelSerializer):
@@ -274,7 +274,7 @@ class ProductSimilarSerializer(FlexFieldsModelSerializer):
         if images:
             image_serializer = ImageNewSerializer(images)
             return image_serializer.data.get("image")
-        return image_serializer.data
+        return {}
 
 
 class ProductVersatileSerializer(FlexFieldsModelSerializer):
@@ -330,7 +330,7 @@ class ProductVersatileSerializer(FlexFieldsModelSerializer):
         if images:
             image_serializer = ImageNewSerializer(images)
             return image_serializer.data.get("image")
-        return image_serializer.data
+        return {}
 
     def create(self, validated_data):
         vendor = self.context["request"].user.vendor
