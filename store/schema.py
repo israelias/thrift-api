@@ -7,13 +7,30 @@ from .models import Category, Product, Image
 class CategoryType(DjangoObjectType):
     class Meta:
         model = Category
-        fields = ("id", "name", "category", "level", "slug")
+        fields = (
+            "id",
+            "name",
+            "parent",
+            "ordering",
+            "slug",
+            "is_active"
+        )
 
 
 class ProductImageType(DjangoObjectType):
     class Meta:
         model = Image
-        field = ("id", "name", "image", "alt_text", "is_feature")
+        field = (
+            "id",
+            "product",
+            "name",
+            "image",
+            "image_ppoi",
+            "alt_text",
+            "is_feature",
+            "created_at",
+            "updated_at"
+        )
 
     def resolve_image(self, info):
         if self.image:
@@ -24,7 +41,19 @@ class ProductImageType(DjangoObjectType):
 class ProductType(DjangoObjectType):
     class Meta:
         model = Product
-        fields = ("id", "title", "category", "vendor", "description", "regular_price", "slug", "product_image")
+        fields = (
+            "id",
+            "title",
+            "category",
+            "vendor",
+            "description",
+            "slug",
+            "price",
+            "is_available",
+            "condition",
+            "created_at",
+            "updated_at"
+        )
 
 
 class Query(graphene.ObjectType):
