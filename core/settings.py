@@ -316,18 +316,15 @@ AUTHENTICATION_BACKENDS = [
     "django.contrib.auth.backends.ModelBackend",
 ]
 
-# CORS_ALLOWED_ORIGINS = [
-#     "http://localhost:3000",
-#     "http://127.0.0.1:8001",
-#     "https://thrifthub.vercel.app",
-#     "https://thrift-hub.vercel.app",
-#     "https://thrifthub-dev.vercel.app",
-#     "https://thrifthub-prod.vercel.app",
-#     "https://thrifthub-test.vercel.app",
-#     "http://localhost:19006",
-#     "http://192.168.1.3:19006/",
-#     "http://192.168.1.3:19006/",
-# ]
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+    "http://127.0.0.1:8001",
+    "https://thriftapi.applikuapp.com",
+    "http://thriftapi.applikuapp.com",
+    "http://localhost:19006",
+    "http://192.168.1.3:19006/",
+    "http://192.168.1.3:19006/",
+]
 
 # CORS_ALLOWED_ORIGIN_REGEXES = [
 #     r"^https://\w+\.thrifthub\.app$",
