@@ -162,6 +162,7 @@ USE_THOUSAND_SEPARATOR = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = "/static/"
+# STATIC_ROOT = str(BASE_DIR / "static/")
 STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)
 # STATICFILES_DIRS = str(BASE_DIR / "static/")
 # STATICFILES_DIRS = [
@@ -185,8 +186,8 @@ if "USE_AWS" in os.environ:
     # Bucket Config
     AWS_STORAGE_BUCKET_NAME = "thrifthub"
     AWS_S3_REGION_NAME = "ap-southeast-1"
-    AWS_ACCESS_KEY_ID = os.environ.get("ACCESS_KEY_ID")
-    AWS_SECRET_ACCESS_KEY = os.environ.get("SECRET_ACCESS_KEY")
+    AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID")
+    AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY")
     AWS_S3_CUSTOM_DOMAIN = f"{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com"
 
     # Static and media files
