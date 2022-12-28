@@ -9,7 +9,7 @@ from rest_framework import permissions
 class CustomOpenAPISchemaGenerator(OpenAPISchemaGenerator):
     def get_schema(self, *args, **kwargs):
         schema = super().get_schema(*args, **kwargs)
-        schema.basePath = "/api/v1.0"  # API prefix
+        schema.basePath = "/api/"  # API prefix
         return schema
 
 
@@ -19,18 +19,20 @@ class CompoundTagsSchema(SwaggerAutoSchema):
     def get_tags(self, operation_keys):
         return [" > ".join(operation_keys[:-1])]
 
-
-schema_view = get_schema_view(
-    openapi.Info(
+# https://appliku.com/post/django-rest-framework-swagger-and-typescript-api-c
+api_info = openapi.Info(
         title="ThriftHub API",
         default_version="v1",
         description="Test description",
         terms_of_service="https://www.google.com/policies/terms/",
         contact=openapi.Contact(email="israelias.js@gmail.com"),
         license=openapi.License(name="BSD License"),
-    ),
+    )
+
+schema_view = get_schema_view(
+    info=api_info,
     public=True,
-    permission_classes=[permissions.AllowAny],
+    permission_classes=(permissions.AllowAny,),
     generator_class=CustomOpenAPISchemaGenerator,
    
 )

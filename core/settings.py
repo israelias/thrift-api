@@ -107,6 +107,7 @@ WSGI_APPLICATION = "core.wsgi.application"
 SWAGGER_SETTINGS = {
     "DEFAULT_AUTO_SCHEMA_CLASS": "core.yasg.CompoundTagsSchema",
     "DEFAULT_GENERATOR_CLASS": "core.yasg.CustomOpenAPISchemaGenerator",
+    "DEFAULT_INFO": "core.yasg.api_info"
 }
 
 # Database
@@ -182,6 +183,9 @@ if "USE_AWS" in os.environ:
         "Expires": "Thu, 31 Dec 2099 20:00:00 GMT",
         "CacheControl": "max-age=94608000",
     }
+
+    AWS_DEFAULT_ACL = None
+    AWS_QUERYSTRING_AUTH = False
 
     # Bucket Config
     AWS_STORAGE_BUCKET_NAME = "thrifthub"
@@ -316,14 +320,17 @@ AUTHENTICATION_BACKENDS = [
     "django.contrib.auth.backends.ModelBackend",
 ]
 
+# User Model Definition
+# AUTH_USER_MODEL = 'account.User'
+
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://127.0.0.1:8001",
     "https://thriftapi.applikuapp.com",
     "http://thriftapi.applikuapp.com",
     "http://localhost:19006",
-    "http://192.168.1.3:19006/",
-    "http://192.168.1.3:19006/",
+    "http://192.168.1.3:19006",
+    "http://192.168.1.3:19006",
 ]
 
 # CORS_ALLOWED_ORIGIN_REGEXES = [
