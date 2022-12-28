@@ -178,8 +178,6 @@ MEDIA_ROOT = str(BASE_DIR / "media/")
 DEFAULT_FILE_STORAGE = "django.core.files.storage.FileSystemStorage"
 
 if "USE_AWS" in os.environ:
-    # https://django-storages.readthedocs.io/en/1.7/backends/amazon-S3.html
-    AWS_S3_SIGNATURE_VERSION = 's3v4'
     # Cache control
     AWS_S3_OBJECT_PARAMETERS = {
         "Expires": "Thu, 31 Dec 2099 20:00:00 GMT",
@@ -344,19 +342,19 @@ CORS_ALLOWED_ORIGINS = [
 #     "change.allowed.com",
 # ]
 
-# CORS_EXPOSE_HEADERS = ["Content-Type", "X-CSRFToken", "Authorization"]
+CORS_EXPOSE_HEADERS = ["Content-Type", "X-CSRFToken", "Authorization"]
 CORS_ALLOW_CREDENTIALS = True
 CORS_ORIGIN_ALLOW_ALL = True
 # CORS_ALLOW_ALL_ORIGINS = True
 # CORS_ALLOWED_ORIGIN_REGEXES
-# CORS_ALLOW_METHODS = [
-#     "DELETE",
-#     "GET",
-#     "OPTIONS",
-#     "PATCH",
-#     "POST",
-#     "PUT",
-# ]
+CORS_ALLOW_METHODS = [
+    "DELETE",
+    "GET",
+    "OPTIONS",
+    "PATCH",
+    "POST",
+    "PUT",
+]
 
 SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(days=15),
