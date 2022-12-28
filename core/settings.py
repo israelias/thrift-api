@@ -37,7 +37,13 @@ DEBUG = "DEVELOPMENT" in os.environ
 if "DEVELOPMENT" in os.environ:
     ALLOWED_HOSTS = []
 else:
-    ALLOWED_HOSTS = ["thriftapi.applikuapp.com", "localhost"]
+    ALLOWED_HOSTS = [
+        "thriftapi.applikuapp.com",
+        'https://thrifthub-backend.herokuapp.com',
+        '52.221.235.25'
+        'ec2-52-221-235-25.ap-southeast-1.compute.amazonaws.com' 
+        "localhost"
+    ]
     # ALLOWED_HOSTS = ["*"]
 
 # Application definition
