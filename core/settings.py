@@ -178,6 +178,8 @@ MEDIA_ROOT = str(BASE_DIR / "media/")
 DEFAULT_FILE_STORAGE = "django.core.files.storage.FileSystemStorage"
 
 if "USE_AWS" in os.environ:
+    # https://django-storages.readthedocs.io/en/1.7/backends/amazon-S3.html
+    AWS_S3_SIGNATURE_VERSION = 's3v4'
     # Cache control
     AWS_S3_OBJECT_PARAMETERS = {
         "Expires": "Thu, 31 Dec 2099 20:00:00 GMT",
