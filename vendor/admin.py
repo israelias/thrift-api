@@ -1,9 +1,6 @@
 from django.contrib import admin
-from mptt.admin import MPTTModelAdmin
 from order.models import Order as OrderModel
 from store.models import Favorite, Product
-from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
-from django.contrib.auth.models import User
 from .models import Friend, Vendor
 
 
@@ -31,28 +28,15 @@ class ProductInline(admin.StackedInline):
     model = Product
 
 
-# class VendorInline(admin.StackedInline):
-#     model = Vendor
-#     can_delete = False
-#     verbose_name_plural = "vendor"
-
-
-# class UserAdmin(BaseUserAdmin):
-#     inlines = (
-#         VendorInline,
-#         ProductInline,
-#         VendorFavoriteInline,
-#         VendorFriendInline,
-#         OrderRequestsInline,
-#         OrdersMadeInline,
-#     )
-
-
-# admin.site.unregister(User)
-# admin.site.register(User, UserAdmin)
 @admin.register(Vendor)
 class VendorAdmin(admin.ModelAdmin):
-    list_display = ['id', 'name', 'created_by']
-    list_fiter = ['created_by', 'category']
-    search_fields = ['name', 'created_by']
-    inlines = [ProductInline, VendorFavoriteInline, VendorFriendInline, OrderRequestsInline, OrdersMadeInline]
+    list_display = ["id", "name", "created_by"]
+    list_fiter = ["created_by", "category"]
+    search_fields = ["name", "created_by"]
+    inlines = [
+        ProductInline,
+        VendorFavoriteInline,
+        VendorFriendInline,
+        OrderRequestsInline,
+        OrdersMadeInline,
+    ]
