@@ -7,14 +7,7 @@ from .models import Category, Product, Image
 class CategoryType(DjangoObjectType):
     class Meta:
         model = Category
-        fields = (
-            "id",
-            "name",
-            "parent",
-            "ordering",
-            "slug",
-            "is_active"
-        )
+        fields = ("id", "name", "parent", "ordering", "slug", "is_active")
 
 
 class ProductImageType(DjangoObjectType):
@@ -29,7 +22,7 @@ class ProductImageType(DjangoObjectType):
             "alt_text",
             "is_feature",
             "created_at",
-            "updated_at"
+            "updated_at",
         )
 
     def resolve_image(self, info):
@@ -52,7 +45,7 @@ class ProductType(DjangoObjectType):
             "is_available",
             "condition",
             "created_at",
-            "updated_at"
+            "updated_at",
         )
 
 
@@ -60,7 +53,9 @@ class Query(graphene.ObjectType):
     all_Categories = graphene.List(CategoryType)
     category_by_name = graphene.Field(CategoryType, name=graphene.String(required=True))
     all_Products = graphene.List(ProductType)
-    all_Products_by_name = graphene.Field(ProductType, slug=graphene.String(required=True))
+    all_Products_by_name = graphene.Field(
+        ProductType, slug=graphene.String(required=True)
+    )
 
     def resolve_category_by_name(self, info, name):
         try:
