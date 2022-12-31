@@ -163,12 +163,12 @@ DATABASES["default"]["ATOMIC_REQUESTS"] = True
 #     }
 
 # Redis Settings
-REDIS_URL = os.environ.get('REDIS_URL', default=None)
+# REDIS_URL = os.environ.get('REDIS_URL', default=None)
 
-if REDIS_URL:
-    CACHES = {
-        "default": dj_database_url.parse(os.environ.get('REDIS_URL'))
-    }
+# if REDIS_URL:
+#     CACHES = {
+#         "default": dj_database_url.parse(os.environ.get('REDIS_URL'))
+#     }
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 # Password validation
