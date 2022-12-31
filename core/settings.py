@@ -21,62 +21,83 @@ if not os.path.exists("env.py"):
 else:
     import env
 
+####################
+# CORE             #
+####################
+
+DEBUG = "DEVELOPMENT" in os.environ
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get("SECRET_KEY")
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = "DEVELOPMENT" in os.environ
-
-if "DEVELOPMENT" in os.environ:
-    ALLOWED_HOSTS = []
+# Allowed Hosts Definition
+if DEBUG:
+    # If Debug is True, allow all.
+    ALLOWED_HOSTS = ['*']
 else:
     ALLOWED_HOSTS = [
         "thriftapi.applikuapp.com",
         'https://thrifthub-backend.herokuapp.com',
         '52.221.235.25'
-        'ec2-52-221-235-25.ap-southeast-1.compute.amazonaws.com' 
+        'ec2-52-221-235-25.ap-southeast-1.compute.amazonaws.com'
         "localhost"
     ]
     # ALLOWED_HOSTS = ["*"]
 
-# Application definition
+"""
+Project Apps Definitions
+Django Apps - Django Internal Apps
+Third Party Apps - Apps installed via requirements.txt
+Project Apps - Project owned / created apps
+Installed Apps = Django Apps + Third Part apps + Projects Apps
+"""
 
-INSTALLED_APPS = [
+DJANGO_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+]
+
+THIRD_PARTY_APPS = [
     "rest_framework_simplejwt",
     "rest_framework_simplejwt.token_blacklist",
     "dj_rest_auth",
     "django_countries",
-    "store",
-    "account",
-    "vendor",
-    "order",
     "corsheaders",
     "mptt",
     "versatileimagefield",
     "django_filters",
     "rest_framework",
     "drf_yasg",
+    'storages',
     # "knox",
-    "storages",
-    "graphene_django",
+    # 'import_export',
+    # 'django_extensions',
+    # 'djangoql',
+    # 'post_office',
+    # 'allauth',
+    # 'allauth.account',
 ]
+
+PROJECT_APPS = [
+    "store",
+    "account",
+    "vendor",
+    "order",
+]
+
+INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + PROJECT_APPS
 
 MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",
+    # 'honeybadger.contrib.DjangoHoneybadgerMiddleware',
     "django.middleware.security.SecurityMiddleware",
+    # 'whitenoise.middleware.WhiteNoiseMiddleware',
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -107,7 +128,6 @@ ACCOUNT_AUTHENTICATION_METHOD = "username_email"
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_USERNAME_MIN_LENGTH = 4
 
-
 WSGI_APPLICATION = "core.wsgi.application"
 
 SWAGGER_SETTINGS = {
@@ -129,6 +149,27 @@ else:
             "NAME": str(BASE_DIR / "db.sqlite3"),
         }
     }
+DATABASES["default"]["ATOMIC_REQUESTS"] = True
+# DATABASES["default"]["CONN_MAX_AGE"] = env.int("CONN_MAX_AGE", default=60)
+
+# if "DATABASE_URL" in os.environ:
+#     DATABASES = {"default": dj_database_url.parse(os.environ.get("DATABASE_URL"))}
+# else:
+#     DATABASES = {
+#         "default": {
+#             "ENGINE": "django.db.backends.sqlite3",
+#             "NAME": str(BASE_DIR / "db.sqlite3"),
+#         }
+#     }
+
+# Redis Settings
+REDIS_URL = os.environ.get('REDIS_URL', default=None)
+
+if REDIS_URL:
+    CACHES = {
+        "default": dj_database_url.parse(os.environ.get('REDIS_URL'))
+    }
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -148,7 +189,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
@@ -164,18 +204,12 @@ USE_TZ = True
 
 USE_THOUSAND_SEPARATOR = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = "/static/"
 # STATIC_ROOT = str(BASE_DIR / "static/")
 STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)
-# STATICFILES_DIRS = str(BASE_DIR / "static/")
-# STATICFILES_DIRS = [
-#     str(BASE_DIR / "static"),
-#     "/var/www/static/",
-# ]
 
 MEDIA_URL = "/media/"
 MEDIA_ROOT = str(BASE_DIR / "media/")
@@ -183,32 +217,43 @@ MEDIA_ROOT = str(BASE_DIR / "media/")
 
 DEFAULT_FILE_STORAGE = "django.core.files.storage.FileSystemStorage"
 
-if "USE_AWS" in os.environ:
+AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME', default=None)
+if AWS_STORAGE_BUCKET_NAME:
+    AWS_DEFAULT_ACL = None
+    AWS_QUERYSTRING_AUTH = False
+    AWS_S3_REGION_NAME = "ap-southeast-1"
+    AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID")
+    AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY")
+
+    AWS_S3_CUSTOM_DOMAIN = f"{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com"
     # Cache control
     AWS_S3_OBJECT_PARAMETERS = {
         "Expires": "Thu, 31 Dec 2099 20:00:00 GMT",
         "CacheControl": "max-age=94608000",
     }
 
-    # AWS_DEFAULT_ACL = 'public-read'
-    # AWS_QUERYSTRING_AUTH = False
+    # s3 static settings
+    STATICFILES_LOCATION = 'static'
+    STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{STATICFILES_LOCATION}/'
+    STATICFILES_STORAGE = 'core.storages.StaticStorage'
 
-    # Bucket Config
-    AWS_STORAGE_BUCKET_NAME = "thrifthub"
-    AWS_S3_REGION_NAME = "ap-southeast-1"
-    AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID")
-    AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY")
-    AWS_S3_CUSTOM_DOMAIN = f"{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com"
+    # s3 public media settings
+    MEDIAFILES_LOCATION = 'media'
+    MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{MEDIAFILES_LOCATION}/'
+    DEFAULT_FILE_STORAGE = 'core.storages.MediaStorage'
 
-    # Static and media files
-    STATICFILES_STORAGE = "core.storages.StaticStorage"
-    STATICFILES_LOCATION = "static"
-    DEFAULT_FILE_STORAGE = "core.storages.MediaStorage"
-    MEDIAFILES_LOCATION = "media"
-
-    # Override static and media URLs in production
-    STATIC_URL = f"https://{AWS_S3_CUSTOM_DOMAIN}/{STATICFILES_LOCATION}/"
-    MEDIA_URL = f"https://{AWS_S3_CUSTOM_DOMAIN}/{MEDIAFILES_LOCATION}/"
+    # STATICFILES_DIRS = (
+    #     # os.path.join(BASE_DIR, "static"),
+    # )
+# else:
+#     MIDDLEWARE.insert(2, 'whitenoise.middleware.WhiteNoiseMiddleware')
+#     STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
+#     WHITENOISE_USE_FINDERS = True
+#     STATIC_HOST = env('DJANGO_STATIC_HOST', default='')
+#     STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+#     STATIC_URL = STATIC_HOST + '/static/'
+#     if DEBUG:
+#         WHITENOISE_AUTOREFRESH = True
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
@@ -255,7 +300,6 @@ else:
     EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER")
     EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD")
     DEFAULT_FROM_EMAIL = os.environ.get("EMAIL_HOST_USER")
-
 
 VERSATILEIMAGEFIELD_SETTINGS = {
     # The amount of time, in seconds, that references to created images
@@ -351,8 +395,6 @@ CORS_ALLOWED_ORIGINS = [
 CORS_EXPOSE_HEADERS = ["Content-Type", "X-CSRFToken", "Authorization"]
 CORS_ALLOW_CREDENTIALS = True
 CORS_ORIGIN_ALLOW_ALL = True
-# CORS_ALLOW_ALL_ORIGINS = True
-# CORS_ALLOWED_ORIGIN_REGEXES
 CORS_ALLOW_METHODS = [
     "DELETE",
     "GET",
@@ -386,3 +428,29 @@ LOGGING = {
         },
     },
 }
+
+HONEYBADGER_API_KEY = os.environ.get('HONEYBADGER_API_KEY', default=None)
+if HONEYBADGER_API_KEY:
+    MIDDLEWARE = ['honeybadger.contrib.DjangoHoneybadgerMiddleware'] + MIDDLEWARE
+    HONEYBADGER = {
+        'API_KEY': HONEYBADGER_API_KEY
+    }
+
+# Celery Settings
+# try:
+#     from kombu import Queue
+#     from celery import Celery
+#     CELERY_BROKER_URL = env('CELERY_BROKER_URL', default='amqp://localhost')
+#     if CELERY_BROKER_URL:
+#         CELERYD_TASK_SOFT_TIME_LIMIT = 60
+#         CELERY_ACCEPT_CONTENT = ['application/json']
+#         CELERY_TASK_SERIALIZER = 'json'
+#         CELERY_RESULT_SERIALIZER = 'json'
+#         CELERY_RESULT_BACKEND = env('REDIS_URL', default='redis://localhost:6379/0')
+#         CELERY_DEFAULT_QUEUE = 'default'
+#         CELERY_QUEUES = (
+#             Queue('default'),
+#         )
+#         CELERY_CREATE_MISSING_QUEUES = True
+# except ModuleNotFoundError:
+#     print("Celery/kombu not installed. Skipping...")
