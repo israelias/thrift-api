@@ -53,5 +53,5 @@ urlpatterns = [
     url(r"^api/", include(urlpatterns_root)),
 ]
 
-# if settings.DEBUG:
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+if settings.AWS_STORAGE_BUCKET_NAME:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

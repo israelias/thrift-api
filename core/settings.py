@@ -290,7 +290,7 @@ STRIPE_WH_SECRET = os.getenv("STRIPE_WH_SECRET")
 SESSION_COOKIE_AGE = 86400
 CART_SESSION_ID = "cart"
 
-if "DEVELOPMENT" in os.environ:
+if DEBUG:
     EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
     DEFAULT_FROM_EMAIL = "noreply@thrifthub.com"
 else:
